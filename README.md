@@ -1,59 +1,110 @@
-# PokedexApp
+Backend NestJS para consumir la PokeAPI
+Este proyecto es un backend desarrollado con NestJS que permite consultar información de Pokémon desde la PokeAPI, formatearla y servirla a través de un endpoint RESTful con caché integrada.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+📝 Descripción
+El objetivo de este backend es crear un endpoint RESTful que permita:
 
-## Development server
+Consultar datos de un Pokémon por su ID o nombre
 
-To start a local development server, run:
+Obtener la información desde la PokeAPI
 
-```bash
-ng serve
-```
+Formatear los datos en una estructura simplificada
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Manejar errores apropiadamente
 
-## Code scaffolding
+Implementar caché para evitar múltiples consultas innecesarias a la API externa
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+✅ Requisitos cumplidos
+✅ Crear endpoint /pokemon/:id
 
-```bash
-ng generate component component-name
-```
+✅ Consultar datos desde la PokeAPI
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+✅ Retornar un JSON estructurado con los siguientes campos:
 
-```bash
-ng generate --help
-```
+json
+Copy
+{
+  "id": 25,
+  "name": "pikachu",
+  "types": ["electric"],
+  "abilities": ["static", "lightning-rod"],
+  "sprite_url": "https://.../pikachu.png"
+}
+✅ Manejar errores (404 si no existe el Pokémon)
 
-## Building
+✅ Implementar caché en el backend para evitar consultas repetidas
 
-To build the project run:
+✅ Backend funcional y probado en localhost:3000/pokemon/<id>
 
-```bash
-ng build
-```
+🏗️ Tecnologías utilizadas
+NestJS - Framework backend sobre Node.js
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+PokeAPI - API pública de Pokémon
 
-## Running unit tests
+@nestjs/axios - Módulo para llamadas HTTP
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+@nestjs/cache-manager - Sistema de caché en memoria
 
-```bash
-ng test
-```
+RxJS - Operador firstValueFrom para consumir observables
 
-## Running end-to-end tests
+HttpException - Gestión de errores personalizados
 
-For end-to-end (e2e) testing, run:
+🗂️ Estructura del proyecto
+Copy
+pokemon-api/
+├── src/
+│   ├── main.ts                 # Bootstrap del servidor
+│   ├── app.module.ts           # Módulo principal
+│   ├── pokemon/
+│   │   ├── pokemon.controller.ts  # Controlador del endpoint
+│   │   ├── pokemon.service.ts     # Servicio con la lógica de negocio
+│   │   └── pokemon.module.ts      # Módulo específico de Pokémon
+🚀 Cómo ejecutar el proyecto
+Clonar el repositorio
 
-```bash
-ng e2e
-```
+Instalar dependencias:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+bash
+Copy
+npm install
+Ejecutar el servidor:
 
-## Additional Resources
+bash
+Copy
+npm run start:dev
+El servidor estará disponible en http://localhost:3000
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+📌 Endpoints disponibles
+Obtener información de un Pokémon
+Método: GET
+
+URL: /pokemon/:id
+
+Parámetro: id (número o nombre del Pokémon)
+
+Ejemplo:
+
+bash
+Copy
+GET http://localhost:3000/pokemon/pikachu
+Respuesta exitosa:
+
+json
+Copy
+{
+  "id": 25,
+  "name": "pikachu",
+  "types": ["electric"],
+  "abilities": ["static", "lightning-rod"],
+  "sprite_url": "https://.../pikachu.png"
+}
+Error:
+
+Código 404 si el Pokémon no existe
+
+⚙️ Configuración
+El proyecto incluye:
+
+CORS configurado para aceptar peticiones desde http://localhost:4200
+
+Caché en memoria con una duración de 60 segundos
