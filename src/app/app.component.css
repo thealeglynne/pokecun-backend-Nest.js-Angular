@@ -1,0 +1,23 @@
+/* src/app/app.component.css */
+.container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  input {
+    padding: 5px;
+    margin: 10px;
+  }
+  
+  button {
+    padding: 5px 10px;
+  }
